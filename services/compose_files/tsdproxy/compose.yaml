@@ -1,0 +1,16 @@
+services:
+  tsdproxy:
+    image: almeidapaulopt/tsdproxy:1
+    volumes:
+      - /run/user/1000/podman/podman.sock:/var/run/podman/podman.sock
+      - datadir:/data
+      - ./config:/config
+    restart: unless-stopped
+    environment:
+     - DOCKER_HOST=unix:///var/run/podman/podman.sock
+    ports:
+      - "8080:8080"
+
+volumes:
+  datadir:
+
